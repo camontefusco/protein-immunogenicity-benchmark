@@ -1,0 +1,20 @@
+dataset:
+  path: data/toy_peptides.csv
+
+features:
+  type: amino_acid_composition
+
+model:
+  type: logistic_regression
+  class_weight: balanced
+  max_iter: 1000
+
+evaluation:
+  cv_folds: 5
+  random_state: 7
+  metrics:
+    - auroc
+    - average_precision
+    - accuracy
+    - expected_calibration_error
+
