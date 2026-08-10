@@ -1,0 +1,4 @@
+construction,rows,excluded_rows,unique_peptides,positive_rate,ties_remaining,mixed_label_rows_remaining
+majority_all,20785,0,17332,0.3003608371421698,662,1087
+majority_excluding_ties,20123,662,16899,0.3102420116284848,0,425
+consistent_labels_only,19698,1087,16676,0.3065793481571733,0,0
