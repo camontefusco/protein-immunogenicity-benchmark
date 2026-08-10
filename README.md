@@ -29,6 +29,8 @@ Best sequence-only PR-AUC by validation design:
 
 For the majority-label context target, sequence-plus-context PR-AUC was 0.771, 0.755, and 0.487, respectively. The paired uplift over the matched sequence model was +0.236, +0.254, and +0.047. The direction persisted when tied outcomes were excluded and when analysis was restricted to completely consistent labels.
 
+The principal sequence benchmark contains 9,668 valid high-confidence peptides (9.2% positive). The peptide-context analysis is a separate 20,785-row task (30.0% positive) with a different target, unit, prevalence, and split assignments. Absolute PR-AUC values are not comparable across these tasks; only the paired context uplift against its matched sequence-only model is interpreted.
+
 These are database-target prediction results. They do not establish a causal biological effect of context variables.
 
 ## Important limitations
