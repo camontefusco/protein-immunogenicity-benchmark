@@ -1,0 +1,79 @@
+{
+  "cluster": {
+    "excluded": {
+      "clusters": 0,
+      "n": 4,
+      "positive_n": 0,
+      "positive_rate": 0.0,
+      "unique_peptides": 4
+    },
+    "test": {
+      "clusters": 1658,
+      "n": 1933,
+      "positive_n": 178,
+      "positive_rate": 0.09208484221417486,
+      "unique_peptides": 1933
+    },
+    "train": {
+      "clusters": 6628,
+      "n": 7735,
+      "positive_n": 712,
+      "positive_rate": 0.092049127343245,
+      "unique_peptides": 7735
+    }
+  },
+  "cluster_count": 8286,
+  "cluster_definition": "transitive connected components at Levenshtein edit distance <= 2",
+  "cluster_overlap_train_test": 0,
+  "cluster_split_search_seeds": 512,
+  "cluster_split_selected_seed": 22,
+  "exact": {
+    "excluded": {
+      "clusters": 0,
+      "n": 4,
+      "positive_n": 0,
+      "positive_rate": 0.0,
+      "unique_peptides": 4
+    },
+    "test": {
+      "clusters": 1819,
+      "n": 1934,
+      "positive_n": 178,
+      "positive_rate": 0.09203722854188211,
+      "unique_peptides": 1934
+    },
+    "train": {
+      "clusters": 6763,
+      "n": 7734,
+      "positive_n": 712,
+      "positive_rate": 0.09206102922161882,
+      "unique_peptides": 7734
+    }
+  },
+  "largest_cluster": 49,
+  "seed": 42,
+  "temporal": {
+    "excluded": {
+      "clusters": 1,
+      "n": 5,
+      "positive_n": 0,
+      "positive_rate": 0.0,
+      "unique_peptides": 5
+    },
+    "test": {
+      "clusters": 1660,
+      "n": 1935,
+      "positive_n": 225,
+      "positive_rate": 0.11627906976744186,
+      "unique_peptides": 1935
+    },
+    "train": {
+      "clusters": 6735,
+      "n": 7732,
+      "positive_n": 665,
+      "positive_rate": 0.08600620796689085,
+      "unique_peptides": 7732
+    }
+  },
+  "temporal_cutoff_year_test_inclusive": 2021
+}

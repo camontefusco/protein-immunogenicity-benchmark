@@ -1,82 +1,49 @@
 # Protein Immunogenicity Benchmark
 
-Portfolio project for sequence-to-function modeling of immunogenic peptide/protein candidates.
+Reproducibility repository for sequence-based ranking of peptide IFN-gamma assay outcomes and the revision of manuscript `CBAC-D-26-03155`.
 
-This repo is designed to become a compact, reproducible benchmark that maps directly to biomolecular ML roles:
+## Repository status
 
-- peptide/protein sequence featurization
-- baseline sequence-to-function prediction
-- protein language model embeddings
-- calibration and uncertainty checks
-- scientific error analysis
+The original repository contained a small portfolio starter built around amino-acid composition and a ten-row toy dataset. That starter package remains available in `src/`, `configs/`, `data/toy_peptides.csv`, and `tests/`.
 
-## First Milestone
+The manuscript-revision evidence is under [`revision/`](revision/README.md). It contains:
 
-Build a clean classical baseline before adding large protein language models.
+- fixed peptide-level validation assignments;
+- executable analysis scripts and publication notebooks;
+- corrected independently tuned model comparisons;
+- grouped-bootstrap confidence intervals;
+- context-target sensitivity analyses;
+- consolidated publication tables and figures;
+- analysis governance, provenance, and an explicit limitations register.
 
-The initial pipeline:
+## Headline corrected results
 
-1. Load a peptide-level dataset with columns `sequence` and `label`.
-2. Validate amino acid sequences.
-3. Convert each sequence into interpretable amino acid composition features.
-4. Train a scikit-learn classifier.
-5. Report AUROC, average precision, accuracy, and calibration error.
+Best sequence-only PR-AUC by validation design:
 
-## Why This Project Exists
+| Validation design | Best model | PR-AUC |
+|---|---:|---:|
+| Exact peptide-disjoint | Stacked ensemble | 0.479 |
+| Edit-distance <=2 cluster split | Random forest | 0.404 |
+| Temporal peptide-disjoint | XGBoost | 0.151 |
 
-The Bayer role asks for evidence of:
+For the majority-label context target, sequence-plus-context PR-AUC was 0.771, 0.755, and 0.487, respectively. The paired uplift over the matched sequence model was +0.236, +0.254, and +0.047. The direction persisted when tied outcomes were excluded and when analysis was restricted to completely consistent labels.
 
-- sequence-to-function modeling
-- protein language models
-- biomolecular interaction and therapeutic candidate workflows
-- scientific rigor
-- collaborative software engineering practices
+These are database-target prediction results. They do not establish a causal biological effect of context variables.
 
-This project is intentionally structured to show those signals in code, documentation, and analysis.
+## Important limitations
 
-## Repository Layout
+- No independent external validation dataset is available.
+- Temporal testing is peptide-disjoint but not simultaneously edit-distance-cluster-purged.
+- Edit distance <=2 addresses one- and two-substitution similarity but is not CD-HIT percentage-identity clustering.
+- The ESM-2 supporting analysis uses a small frozen model, not fine-tuning or a comprehensive PLM benchmark.
+- The original raw 161-column IEDB export is unavailable, so curation cannot be reproduced from the original download.
+- Reliable HLA restriction is absent, preventing defensible HLA-anchor validation.
 
-```text
-protein-immunogenicity-benchmark/
-  configs/              Experiment configs
-  data/                 Local datasets or download notes
-  notebooks/            Exploratory analyses
-  reports/              Figures, tables, and written findings
-  src/pib/              Reusable Python package
-  tests/                Lightweight regression tests
-```
+See [`revision/governance/LIMITATIONS_REGISTER.md`](revision/governance/LIMITATIONS_REGISTER.md) for the controlled wording.
 
-## Quick Start
+## Reproducing the publication layer
 
-Create a virtual environment and install the package:
+The notebooks in `revision/notebooks/` are executed records that read the registered aggregate artifacts and regenerate publication tables and figures. Model-training scripts are retained separately in `revision/scripts/`.
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -e ".[dev]"
-```
-
-Run tests:
-
-```bash
-pytest
-```
-
-Run the starter baseline on the toy dataset:
-
-```bash
-python -m pib.train_baseline --data data/toy_peptides.csv
-```
-
-## Three-Month Target
-
-By the end of this project, the repo should include:
-
-- classical peptide descriptors
-- ESM2 or ProtT5 embeddings
-- at least two model families
-- calibration and uncertainty evaluation
-- biologically grounded error analysis
-- reproducible CLI workflows
-- a polished technical write-up
+This repository intentionally excludes submission correspondence, author-identifying attachments, superseded/quarantined results, serialized model binaries, embedding arrays, and row-level test predictions.
 
