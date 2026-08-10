@@ -9,7 +9,9 @@ This directory is a publication-safe projection of the canonical local revision 
 - `scripts/`: deterministic audit, splitting, training, uncertainty, calibration, ESM-2, motif, and sensitivity scripts.
 - `notebooks/`: six executed publication notebooks that consume registered artifacts and produce consolidated outputs.
 - `data/splits/`: fixed peptide-level assignments used by the corrected analyses.
+- `data/curated/`: recovered self-contained peptide-context analysis table used by the context reruns.
 - `results/corrected_sequence/`: independently tuned per-design model metrics and grouped-bootstrap uncertainty.
+- `results/context_ablation/`: grouped biological/assay ablations and individual-feature comparisons with corrected grouped uncertainty.
 - `results/context_sensitivity/`: majority-label, tie-excluded, and consistent-label sensitivity results.
 - `results/publication/`: manuscript-facing aggregate tables and figures.
 - `provenance/`: observed runtime metadata and a portable publication dependency specification.
@@ -23,13 +25,13 @@ This directory is a publication-safe projection of the canonical local revision 
 
 ## Data boundary
 
-`peptide_split_assignments_v1.csv` contains peptide-level assignments derived from the locally recovered curated dataset. The original raw 161-column IEDB download is unavailable. Consequently, this repository supports reproduction from the curated analysis state, but not independent reconstruction of the original curation from the raw download.
+`peptide_split_assignments_v1.csv` contains peptide-level assignments derived from the locally recovered curated dataset. `data/curated/context_dataset_and_splits.csv` supplies the recovered input required by the context ablation and target-sensitivity scripts. The original raw 161-column IEDB download is unavailable. Consequently, this repository supports reproduction from the recovered curated analysis state, but not reconstruction of the original curation from the raw download.
 
 ## Recommended execution order
 
 1. Review `governance/ANALYSIS_GOVERNANCE.md` and `governance/LIMITATIONS_REGISTER.md`.
 2. Inspect the fixed assignments in `data/splits/`.
-3. Run or audit the relevant scripts in numerical order after supplying the recovered curated inputs through the documented environment variables.
+3. Run or audit the relevant scripts in numerical order. The context sensitivity input is included under `data/curated/`; upstream raw-export reconstruction remains unavailable.
 4. Review the six notebooks in `notebooks/` as executed publication records. They retain the canonical local-project layout assumptions; the consolidated CSV and PNG outputs are supplied under `results/publication/`.
 5. Reconcile outputs against `results/CORRECTED_RESULTS_SUMMARY.md`.
 

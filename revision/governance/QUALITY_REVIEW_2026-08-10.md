@@ -2,8 +2,10 @@
 
 ## Release decision
 
-The recovery analysis is scientifically informative but is not yet cleared for
-manuscript use. Two defects require rerun.
+The two blocking defects identified below were subsequently corrected. The
+validated manuscript inputs now use independent tuning inside each design and
+grouped context bootstrapping. The historical defective outputs remain
+quarantined and must not be cited.
 
 ## Q-001: cross-design hyperparameter contamination
 
@@ -35,3 +37,16 @@ rows can share a peptide and edit-distance component.
 - The original raw 161-column IEDB export and deterministic curation pipeline remain
   unavailable.
 - Executed publication notebooks have not yet been generated.
+
+## Post-correction limitations retained for release
+
+- One frozen outer test set is used per design; bootstrap intervals are
+  conditional on those test sets.
+- Sequence tuning uses one three-fold grouped CV run, modest grids, and one
+  seed; context and ESM-2 downstream classifiers are fixed rather than tuned.
+- The temporal split is exact-peptide-disjoint but has 110 edit-distance-2
+  components spanning development and test.
+- Efficiency records omit peak memory and complete stacked-model inference
+  time and serialized bundle size.
+- The original 161-column IEDB export remains unavailable, so upstream curation
+  cannot be reproduced.

@@ -11,8 +11,7 @@ from sklearn.metrics import average_precision_score, roc_auc_score
 SEED = 42
 N_BOOT = 2000
 ROOT = Path(__file__).resolve().parents[2]
-RECOVERY = ROOT.parent / "04_reproducible_analysis" / "artifacts" / "context_ablation"
-SOURCE = RECOVERY / "test_predictions.csv"
+SOURCE = ROOT / "05_results" / "validated" / "context_ablation" / "test_predictions.csv"
 OUT = ROOT / "05_results" / "validated" / "corrected_context_uncertainty"
 OUT.mkdir(parents=True, exist_ok=True)
 

@@ -18,8 +18,7 @@ from sklearn.preprocessing import FunctionTransformer, OneHotEncoder, StandardSc
 SEED = 42
 N_BOOT = 2000
 ROOT = Path(__file__).resolve().parents[2]
-RECOVERY = ROOT.parent / "04_reproducible_analysis" / "artifacts" / "context_ablation"
-SOURCE = RECOVERY / "context_dataset_and_splits.csv"
+SOURCE = ROOT / "02_data" / "curated" / "context_dataset_and_splits.csv"
 OUT = ROOT / "05_results" / "validated" / "context_label_sensitivity"
 MODEL_DIR = OUT / "models"
 OUT.mkdir(parents=True, exist_ok=True)
@@ -30,6 +29,9 @@ ASSAY = ["assay_method", "readout", "host"]
 MODEL_SPECS = {
     "sequence_only": (True, [], []),
     "biological_only": (False, BIOLOGICAL, ["length"]),
+    "assay_only": (False, ASSAY, []),
+    "sequence_plus_biological": (True, BIOLOGICAL, ["length"]),
+    "sequence_plus_assay": (True, ASSAY, []),
     "sequence_plus_all_no_evidence": (True, BIOLOGICAL + ASSAY, ["length"]),
     "all_context_no_sequence_no_evidence": (False, BIOLOGICAL + ASSAY, ["length"]),
 }

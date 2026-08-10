@@ -13,6 +13,7 @@ The manuscript-revision evidence is under [`revision/`](revision/README.md). It 
 - corrected independently tuned model comparisons;
 - grouped-bootstrap confidence intervals;
 - context-target sensitivity analyses;
+- biological, assay, and individual-feature context ablations;
 - consolidated publication tables and figures;
 - analysis governance, provenance, and an explicit limitations register.
 
@@ -38,6 +39,9 @@ These are database-target prediction results. They do not establish a causal bio
 - The ESM-2 supporting analysis uses a small frozen model, not fine-tuning or a comprehensive PLM benchmark.
 - The original raw 161-column IEDB export is unavailable, so curation cannot be reproduced from the original download.
 - Reliable HLA restriction is absent, preventing defensible HLA-anchor validation.
+- One frozen outer test set is used per design; grouped-bootstrap intervals are conditional on those sets.
+- Sequence tuning used one three-fold grouped CV run, modest grids, and one seed; context and ESM-2 downstream classifiers were fixed.
+- Efficiency records omit peak memory and complete stacked-model inference time and bundle size.
 
 See [`revision/governance/LIMITATIONS_REGISTER.md`](revision/governance/LIMITATIONS_REGISTER.md) for the controlled wording.
 
@@ -46,4 +50,3 @@ See [`revision/governance/LIMITATIONS_REGISTER.md`](revision/governance/LIMITATI
 The notebooks in `revision/notebooks/` are executed records that read the registered aggregate artifacts and regenerate publication tables and figures. Model-training scripts are retained separately in `revision/scripts/`.
 
 This repository intentionally excludes submission correspondence, author-identifying attachments, superseded/quarantined results, serialized model binaries, embedding arrays, and row-level test predictions.
-
