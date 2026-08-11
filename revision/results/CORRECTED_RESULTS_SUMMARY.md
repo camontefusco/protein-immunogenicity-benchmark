@@ -43,3 +43,6 @@ each sampled peptide or edit-distance component.
 These results support strong cross-sectional database-conditional context signal but
 limited temporal transfer. They do not demonstrate causal biological determinants
 or external generalization.
+# Post-release forensic audit (2026-08-11)
+
+Revision v5.1 temporal context values are superseded by the strict-censor results in `forensic_sensitivities/`. The corrected majority-label temporal context PR-AUC is 0.363 versus 0.324 for the matched sequence-only model (paired uplift 0.039; grouped-bootstrap 95% CI 0.016-0.061). See `revision/governance/FORENSIC_METRIC_AND_LEAKAGE_AUDIT_2026-08-11.md` for the complete metric, calibration, near-neighbour, study-dependence, and provenance review.
