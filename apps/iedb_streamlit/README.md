@@ -12,6 +12,10 @@ streamlit run apps/iedb_streamlit/app.py
 
 The app expects the repository data under `data/curated/`. No Google Drive mount is required.
 
+## Deploy on Streamlit Community Cloud
+
+Yes. In Streamlit Community Cloud, create a new app from this GitHub repository, select the `main` branch, and set the main file to `apps/iedb_streamlit/app.py`. The app-specific `requirements.txt` in the same directory supplies the runtime dependencies. The repository data files under `data/curated/` are read locally at startup, so no Drive connection or secret is needed. The first launch may take a little longer while the baseline models are trained and cached.
+
 ## Test a new epitope
 
 1. Launch the app and confirm the warning beneath the title. It identifies the app as an exploratory baseline.
@@ -23,6 +27,10 @@ The app expects the repository data under `data/curated/`. No Google Drive mount
 7. Use the optional virus and assay-method filters only to inspect matching IEDB records. They do not change the sequence-only prediction.
 8. Inspect **Where do these peptides appear in IEDB?** to see matching records and source-virus context.
 9. Select **Download predictions (CSV)** to save the ranked candidates for a screening worksheet.
+
+## How to interpret the displayed results
+
+The two prediction columns answer different questions. `pred_P_IFNg_positive` is the logistic-regression ranking score learned from the high-confidence peptide labels; `pred_pos_rate` is the Ridge estimate of the aggregate positive-assay fraction for a peptide. A larger value means that the candidate is ranked higher by that baseline, not that it has a calibrated probability for an individual person. The performance tables compare each baseline with a dummy reference on one peptide-disjoint holdout split. For classification, ROC-AUC and PR-AUC describe discrimination, while accuracy is threshold-dependent. For regression, RMSE and MAE measure prediction error and R2 is a relative fit statistic. The dataset snapshot reports the assay rows and peptide-level tables used by the app. Matching IEDB records are descriptive source records; they are not additional validation data and the optional filters do not alter the sequence-only models.
 
 ## Screenshots
 
