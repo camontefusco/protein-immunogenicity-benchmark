@@ -67,14 +67,15 @@ def train_models(hiconf: pd.DataFrame, rates: pd.DataFrame, random_state: int = 
     X_test  = cls_test["peptide"].astype(str)
     y_test  = cls_test["label_hiconf"].astype(int)
 
-    vec = TfidfVectorizer(analyzer="char", ngram_range=(2,4), lowercase=False)
+    def make_vec():
+        return TfidfVectorizer(analyzer="char", ngram_range=(2,4), lowercase=False)
 
     dummy_cls = Pipeline([
-        ("vec", vec),
+        ("vec", make_vec()),
         ("clf", DummyClassifier(strategy="most_frequent")),
     ])
     logreg = Pipeline([
-        ("vec", vec),
+        ("vec", make_vec()),
         ("clf", LogisticRegression(max_iter=3000, class_weight="balanced", random_state=random_state)),
     ])
 
@@ -107,8 +108,8 @@ def train_models(hiconf: pd.DataFrame, rates: pd.DataFrame, random_state: int = 
     Xr_test  = reg_test["peptide"].astype(str)
     yr_test  = reg_test["pos_rate"].astype(float)
 
-    dummy_reg = Pipeline([("vec", vec), ("reg", DummyRegressor(strategy="mean"))])
-    ridge = Pipeline([("vec", vec), ("reg", Ridge(alpha=1.0, random_state=random_state))])
+    dummy_reg = Pipeline([("vec", make_vec()), ("reg", DummyRegressor(strategy="mean"))])
+    ridge = Pipeline([("vec", make_vec()), ("reg", Ridge(alpha=1.0, random_state=random_state))])
 
     dummy_reg.fit(Xr_train, yr_train)
     ridge.fit(Xr_train, yr_train)
