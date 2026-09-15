@@ -1,0 +1,7 @@
+{
+  "training_rule": "temporal_split=train and reconstructed latest publication year < 2021",
+  "test_rule": "temporal_split=test (earliest publication year >= 2021)",
+  "models": "fixed balanced logistic C=1.0",
+  "bootstrap": "2000 peptide-grouped paired replicates",
+  "seed": 42
+}

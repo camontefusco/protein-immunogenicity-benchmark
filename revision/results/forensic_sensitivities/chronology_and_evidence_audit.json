@@ -1,0 +1,11 @@
+{
+  "temporal_train_peptides": 7732,
+  "temporal_train_with_latest_year_2021_or_later": 89,
+  "temporal_train_missing_latest_year": 0,
+  "temporal_test_with_earliest_before_2021": 0,
+  "peptides_total_tested_lt_5": 1973,
+  "peptides_total_tested_lt_10": 3654,
+  "peptides_one_reference_or_less": 9153,
+  "context_temporal_train_rows_with_peptide_latest_2021_or_later": 1135,
+  "context_temporal_train_unique_peptides_with_latest_2021_or_later": 928
+}

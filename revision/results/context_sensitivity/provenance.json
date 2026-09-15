@@ -1,0 +1,12 @@
+{
+  "bootstrap": "paired hierarchical bootstrap by peptide or edit-distance-2 component",
+  "replicates": 2000,
+  "seed": 42,
+  "source_context_dataset": "/Users/cmontefusco/Documents/Codex/2026-08-10/t/outputs/CBAC-D-26-03155_revision/06_canonical_revision_project/02_data/curated/context_dataset_and_splits.csv",
+  "splits": "unchanged frozen exact, cluster and temporal assignments",
+  "target_constructions": {
+    "consistent_labels_only": "retain only context rows with one unique assay label",
+    "majority_all": "majority rule; exact 0.5 ties assigned negative",
+    "majority_excluding_ties": "majority rule after excluding exact 0.5 ties"
+  }
+}
