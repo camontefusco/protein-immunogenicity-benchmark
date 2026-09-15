@@ -9,6 +9,7 @@ data/          raw IEDB export, curated tables, toy example, and fixed split ass
 configs/       validation-design configuration
 scripts/       executable audits, splits, training, uncertainty, calibration, and sensitivities
 notebooks/     six executed publication notebooks
+apps/          interactive Streamlit app provenance and deployment notes
 results/       validated metrics, forensic audits, manuscript tables, and figures
 governance/    analysis rules, reviewer crosswalk, quality reviews, and limitations
 provenance/    runtime metadata and publication dependency specification
@@ -69,6 +70,10 @@ In a real deployment, the workflow should be treated as a ranking aid alongside 
 6. Compare outputs with `results/CORRECTED_RESULTS_SUMMARY.md` and `results/publication/tables/`.
 
 All publication notebooks use repository-relative paths and do not require a Google Drive mount.
+
+## Interactive application
+
+The Drive archive also contains an `iedb_streamlit_app` with `app.py`, `requirements.txt`, and a short README. It is an interactive exploratory interface for browsing or scoring IEDB-derived records, not the source of the validated publication metrics. The repository records its provenance under `apps/iedb_streamlit/README.md`; the batch scripts and publication notebooks remain authoritative for the manuscript results.
 
 ## Manuscript crosswalk
 
