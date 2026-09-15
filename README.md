@@ -30,6 +30,16 @@ The primary sequence task is peptide-level ranking. The context task is separate
 
 Corrected headline results are exact-peptide PR-AUC 0.479, edit-distance-2 cluster PR-AUC 0.404, and strict temporal sequence-plus-context PR-AUC 0.363 versus 0.324 sequence-only (paired uplift 0.039; 95% CI 0.016 to 0.061).
 
+The main visual results are linked here:
+
+- [Figure 1 sequence-model discrimination](results/publication/figures/figure_01_sequence_models.png): sequence-only performance across exact, cluster, and temporal validation designs.
+- [Figure 2 context sensitivity](results/publication/figures/figure_02_context_sensitivity.png): context-target constructions and paired uplift against sequence-only models.
+- [Figure 3 calibration](results/publication/figures/figure_03_calibration.png): group-safe reliability and calibration summaries.
+- [Figure 4 ESM-2 and motif analysis](results/publication/figures/figure_04_esm2_motifs.png): the small frozen protein-language-model comparison and exploratory motif enrichment.
+- [Graphical abstract](results/publication/figures/graphical_abstract_v5.png): overview of the benchmark workflow and its interpretation.
+
+The corresponding machine-readable tables are [sequence performance](results/publication/tables/table_02_sequence_performance.csv), [context sensitivity](results/publication/tables/table_03_context_sensitivity.csv), [calibration](results/publication/tables/table_04_calibration.csv), and [ESM-2 comparison](results/publication/tables/table_05_esm2_comparison.csv). The complete corrected summary is in [CORRECTED_RESULTS_SUMMARY.md](results/CORRECTED_RESULTS_SUMMARY.md).
+
 These are retrospective database-target results. They do not establish external generalization, HLA-specific recognition, vaccine efficacy, protection, causal biological effects, or individual clinical immunogenicity.
 
 ## Reproduce or audit
@@ -46,6 +56,8 @@ All publication notebooks use repository-relative paths and do not require a Goo
 ## Manuscript crosswalk
 
 `results/publication/figures/` contains the four manuscript figures and graphical abstract. `results/publication/tables/` contains manuscript-facing aggregate tables. Manuscript DOCX files and the response letter remain in the paper project because they contain submission formatting and correspondence; this repository contains the computational evidence needed to audit their reported methods and results.
+
+The manuscript-to-repository mapping, including the corrected values that supersede older draft prose, is documented in [MANUSCRIPT_CROSSWALK.md](governance/MANUSCRIPT_CROSSWALK.md).
 
 ## Historical Drive notebooks
 
