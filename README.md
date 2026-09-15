@@ -42,6 +42,23 @@ The corresponding machine-readable tables are [sequence performance](results/pub
 
 These are retrospective database-target results. They do not establish external generalization, HLA-specific recognition, vaccine efficacy, protection, causal biological effects, or individual clinical immunogenicity.
 
+## Conclusion
+
+The benchmark shows that peptide sequence contains reproducible but bounded signal for ranking IFN-gamma assay outcomes. Performance decreases when validation becomes more stringent, especially for edit-distance-2 and temporal separation. Adding assay and biological context improves ranking in the separate peptide-context task, but the strict temporal uplift is small and is driven mainly by assay metadata. The practical conclusion is therefore methodological: leakage-safe splits, explicit target definitions, early-retrieval metrics, calibration checks, and context sensitivity analyses are necessary before interpreting public IFN-gamma prediction results. The repository supports auditing and prioritization research, not a validated clinical or vaccine-response predictor.
+
+## Use in real-world problems
+
+The results are most useful as a pre-experimental triage and audit workflow:
+
+- **Screening large candidate lists:** use sequence-only scores to rank candidates for a limited experimental shortlist, then report Precision@K and enrichment at the actual screening budget rather than relying only on ROC-AUC.
+- **Choosing validation designs:** use exact-peptide, edit-distance-2, and temporal splits to distinguish performance on repeated-like candidates, near-neighbour candidates, and later evidence. A model should not be deployed based on a random peptide split alone.
+- **Using assay metadata responsibly:** context features can improve retrospective ranking when the relevant metadata will genuinely be available at prediction time. Metadata that encode future assay evidence must be excluded from prospective use.
+- **Planning experiments:** calibrated outputs can support relative prioritization and threshold selection for follow-up assays, but they should not be interpreted as the probability that a peptide will respond in a particular person.
+- **Auditing database-derived models:** the raw export, curated tables, split assignments, provenance files, and forensic analyses allow teams to check label construction, duplicate handling, temporal overlap, and sensitivity to tied or inconsistent context labels.
+- **Designing the next model:** reliable HLA restriction, prospective external data, study-disjoint evaluation, and larger frozen protein-language-model comparisons are the main additions needed before making stronger translational claims.
+
+In a real deployment, the workflow should be treated as a ranking aid alongside antigen-processing, HLA-binding, safety, conservation, and laboratory evidence. It should not be used as a stand-alone decision rule for vaccine composition, patient treatment, or claims of protective immunity.
+
 ## Reproduce or audit
 
 1. Install `provenance/requirements-publication.txt`.
