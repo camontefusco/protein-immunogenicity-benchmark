@@ -80,6 +80,8 @@ All publication notebooks use repository-relative paths and do not require a Goo
 
 The Drive archive also contains an `iedb_streamlit_app` with `app.py`, `requirements.txt`, and a short README. It is an interactive exploratory interface for browsing or scoring IEDB-derived records, not the source of the validated publication metrics. The repository records its provenance under `apps/iedb_streamlit/README.md`; the batch scripts and publication notebooks remain authoritative for the manuscript results.
 
+The live exploratory app is available at [protein-immunogenicity-benchmark.streamlit.app](https://gijgxvd4a6ftyy732vegdk.streamlit.app/). It may take a short time to wake from sleep or rebuild after a new commit.
+
 ## Manuscript crosswalk
 
 `results/publication/figures/` contains the four manuscript figures and graphical abstract. `results/publication/tables/` contains manuscript-facing aggregate tables. Manuscript DOCX files and the response letter remain in the paper project because they contain submission formatting and correspondence; this repository contains the computational evidence needed to audit their reported methods and results.

@@ -16,6 +16,8 @@ The app expects the repository data under `data/curated/`. No Google Drive mount
 
 Yes. In Streamlit Community Cloud, create a new app from this GitHub repository, select the `main` branch, and set the main file to `apps/iedb_streamlit/app.py`. The app-specific `requirements.txt` in the same directory supplies the runtime dependencies. The repository data files under `data/curated/` are read locally at startup, so no Drive connection or secret is needed. The first launch may take a little longer while the baseline models are trained and cached.
 
+Live deployment: [protein-immunogenicity-benchmark.streamlit.app](https://gijgxvd4a6ftyy732vegdk.streamlit.app/).
+
 ## Test a new epitope
 
 1. Launch the app and confirm the warning beneath the title. It identifies the app as an exploratory baseline.
