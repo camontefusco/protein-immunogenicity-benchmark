@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: Protein Immunogenicity Benchmark
+message: Please cite the associated manuscript and the repository commit used for the analysis.
+type: software
+authors:
+  - family-names: Montefusco-Pereira
+    given-names: Carlos
+repository-code: https://github.com/camontefusco/protein-immunogenicity-benchmark
+license: MIT
+version: 0.1.0

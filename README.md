@@ -15,6 +15,7 @@ governance/    analysis rules, reviewer crosswalk, quality reviews, and limitati
 provenance/    runtime metadata and publication dependency specification
 src/           reusable baseline package retained from the starter project
 tests/         unit tests
+CITATION.cff   citation metadata
 ```
 
 The repository uses a regular project layout; there is no separate revision-only directory.
@@ -24,6 +25,8 @@ The repository uses a regular project layout; there is no separate revision-only
 The source file is `data/raw/tcell_table_export_1769046013.csv`, stored with Git LFS. It contains 31,629 IEDB records and 161 columns. Its SHA-256 and Drive provenance are recorded in `data/raw/README.md`.
 
 The downstream assay-level, peptide-level, and peptide-context tables under `data/curated/` are derived products. Fixed peptide assignments under `data/splits/` are reused across model comparisons.
+
+The field meanings and target boundaries are summarized in [data/DATA_DICTIONARY.md](data/DATA_DICTIONARY.md).
 
 ## Validated analysis scope
 
@@ -68,6 +71,8 @@ In a real deployment, the workflow should be treated as a ranking aid alongside 
 4. Run scripts in numerical order when a full rerun is required; scripts 17 to 20 contain forensic audits.
 5. Open the six notebooks in `notebooks/` for the executed publication workflow.
 6. Compare outputs with `results/CORRECTED_RESULTS_SUMMARY.md` and `results/publication/tables/`.
+
+For a fast integrity check without rerunning analyses, run `python scripts/audit_repository.py`. It verifies required artifacts, the raw-export checksum, and the validation configuration.
 
 All publication notebooks use repository-relative paths and do not require a Google Drive mount.
 
