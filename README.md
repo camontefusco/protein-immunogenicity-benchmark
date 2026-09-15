@@ -1,60 +1,64 @@
 # Protein Immunogenicity Benchmark
 
-Reproducibility repository for sequence-based ranking of peptide IFN-gamma assay outcomes and the revision of manuscript `CBAC-D-26-03155`.
+Reproducible analysis of peptide-level IFN-gamma assay outcomes from an IEDB export. This repository contains the data audit, leakage-aware validation designs, model reruns, context sensitivity analyses, calibration checks, frozen ESM-2 comparison, publication tables, and figures used for the manuscript revision.
 
-## Repository status
+## Project layout
 
-The original repository contained a small portfolio starter built around amino-acid composition and a ten-row toy dataset. That starter package remains available in `src/`, `configs/`, `data/toy_peptides.csv`, and `tests/`.
+```text
+data/          raw IEDB export, curated tables, toy example, and fixed split assignments
+configs/       validation-design configuration
+scripts/       executable audits, splits, training, uncertainty, calibration, and sensitivities
+notebooks/     six executed publication notebooks
+results/       validated metrics, forensic audits, manuscript tables, and figures
+governance/    analysis rules, reviewer crosswalk, quality reviews, and limitations
+provenance/    runtime metadata and publication dependency specification
+src/           reusable baseline package retained from the starter project
+tests/         unit tests
+```
 
-The manuscript-revision evidence is under [`revision/`](revision/README.md). It contains:
+The repository uses a regular project layout; there is no separate revision-only directory.
 
-- fixed peptide-level validation assignments;
-- executable analysis scripts and publication notebooks;
-- corrected independently tuned model comparisons;
-- grouped-bootstrap confidence intervals;
-- context-target sensitivity analyses;
-- biological, assay, and individual-feature context ablations;
-- consolidated publication tables and figures;
-- analysis governance, provenance, and an explicit limitations register.
+## Data and provenance
 
-## Headline corrected results
+The source file is `data/raw/tcell_table_export_1769046013.csv`, stored with Git LFS. It contains 31,629 IEDB records and 161 columns. Its SHA-256 and Drive provenance are recorded in `data/raw/README.md`.
 
-Best sequence-only PR-AUC by validation design:
+The downstream assay-level, peptide-level, and peptide-context tables under `data/curated/` are derived products. Fixed peptide assignments under `data/splits/` are reused across model comparisons.
 
-| Validation design | Best model | PR-AUC |
-|---|---:|---:|
-| Exact peptide-disjoint | Stacked ensemble | 0.479 |
-| Edit-distance <=2 cluster split | Random forest | 0.404 |
-| Temporal peptide-disjoint | XGBoost | 0.151 |
+## Validated analysis scope
 
-For the majority-label context target, the cross-sectional sequence-plus-context PR-AUC was 0.771 and 0.755 for exact-peptide and edit-distance-2 designs. The original temporal estimate of 0.487 is superseded by the strict-censor rerun: 0.363 versus 0.324 for the matched sequence-only model, with paired uplift +0.039 (95% CI 0.016 to 0.061). The temporal result is therefore a small, assay-metadata-driven uplift rather than evidence of broad temporal generalization.
+The primary sequence task is peptide-level ranking. The context task is separate, with a different unit, target, prevalence, and split structure. Absolute PR-AUC values must not be compared between these tasks; context is interpreted through paired uplift against its matched sequence-only model.
 
-The principal sequence benchmark contains 9,668 valid high-confidence peptides (9.2% positive). The peptide-context analysis is a separate 20,785-row task (30.0% positive) with a different target, unit, prevalence, and split assignments. Absolute PR-AUC values are not comparable across these tasks; only the paired context uplift against its matched sequence-only model is interpreted.
+Corrected headline results are exact-peptide PR-AUC 0.479, edit-distance-2 cluster PR-AUC 0.404, and strict temporal sequence-plus-context PR-AUC 0.363 versus 0.324 sequence-only (paired uplift 0.039; 95% CI 0.016 to 0.061).
 
-These are database-target prediction results. They do not establish a causal biological effect of context variables.
+These are retrospective database-target results. They do not establish external generalization, HLA-specific recognition, vaccine efficacy, protection, causal biological effects, or individual clinical immunogenicity.
 
-## Important limitations
+## Reproduce or audit
+
+1. Install `provenance/requirements-publication.txt`.
+2. Review `governance/ANALYSIS_GOVERNANCE.md` and `governance/LIMITATIONS_REGISTER.md`.
+3. Inspect `data/splits/` and result provenance files.
+4. Run scripts in numerical order when a full rerun is required; scripts 17 to 20 contain forensic audits.
+5. Open the six notebooks in `notebooks/` for the executed publication workflow.
+6. Compare outputs with `results/CORRECTED_RESULTS_SUMMARY.md` and `results/publication/tables/`.
+
+All publication notebooks use repository-relative paths and do not require a Google Drive mount.
+
+## Manuscript crosswalk
+
+`results/publication/figures/` contains the four manuscript figures and graphical abstract. `results/publication/tables/` contains manuscript-facing aggregate tables. Manuscript DOCX files and the response letter remain in the paper project because they contain submission formatting and correspondence; this repository contains the computational evidence needed to audit their reported methods and results.
+
+## Historical Drive notebooks
+
+The Drive archive contains earlier Colab notebooks from exploratory development. Several use obsolete paths, superseded splits, or earlier claims, so they are not mixed into the validated workflow. Their names, Drive IDs, and status are recorded in `governance/DRIVE_NOTEBOOK_INVENTORY.md`. The six notebooks in `notebooks/` are authoritative for the publication layer.
+
+## Limitations
 
 - No independent external validation dataset is available.
-- Temporal testing is peptide-disjoint but not simultaneously edit-distance-cluster-purged.
-- Edit distance <=2 addresses one- and two-substitution similarity but is not CD-HIT percentage-identity clustering.
-- The ESM-2 supporting analysis uses a small frozen model, not fine-tuning or a comprehensive PLM benchmark.
-- The original raw 161-column IEDB export is included under `revision/data/raw/` through Git LFS. Its SHA-256 is recorded in `revision/data/raw/README.md`; the same file is archived in the project Drive folder.
+- Temporal testing is peptide-disjoint but not simultaneously cluster-purged.
+- Edit distance <=2 is not identical to CD-HIT percentage-identity clustering.
+- ESM-2 is a small frozen model, not fine-tuning or a comprehensive PLM benchmark.
 - Reliable HLA restriction is absent, preventing defensible HLA-anchor validation.
 - One frozen outer test set is used per design; grouped-bootstrap intervals are conditional on those sets.
-- Sequence tuning used one three-fold grouped CV run, modest grids, and one seed; context and ESM-2 downstream classifiers were fixed.
-- Efficiency records omit peak memory and complete stacked-model inference time and bundle size.
+- Exact reproduction remains dependent on documented curation rules and software environment.
 
-See [`revision/governance/LIMITATIONS_REGISTER.md`](revision/governance/LIMITATIONS_REGISTER.md) for the controlled wording.
-
-## Provenance and manuscript crosswalk
-
-The raw IEDB export (31,629 rows and 161 columns) is the source table. The curated assay-level and peptide-level tables under `revision/data/curated/` are downstream products of the documented curation and aggregation steps. The fixed splits, rerun scripts, notebooks, aggregate tables, and figures are the auditable analysis layer. Manuscript and response-letter DOCX files are intentionally kept outside this code repository; the repository contains the evidence needed to verify their reported methods and results.
-
-The Drive folder used during recovery is the project archive: <https://drive.google.com/drive/folders/1l1aj9JQ1F1E7hSVDe3eb38_1Puuhzmg6>.
-
-## Reproducing the publication layer
-
-The notebooks in `revision/notebooks/` are executed records that read the registered aggregate artifacts and regenerate publication tables and figures. Model-training scripts are retained separately in `revision/scripts/`.
-
-This repository intentionally excludes submission correspondence, author-identifying attachments, superseded/quarantined results, serialized model binaries, embedding arrays, and row-level test predictions.
+See `governance/LIMITATIONS_REGISTER.md` for controlled wording.

@@ -1,0 +1,4 @@
+split,vocabulary_size,nonzero_coefficients,selected_motifs,heldout_fdr_below_0_05,direction_consistent_count
+exact,29398,527,100,5,61
+cluster,29171,522,100,9,57
+temporal,29906,543,100,0,40

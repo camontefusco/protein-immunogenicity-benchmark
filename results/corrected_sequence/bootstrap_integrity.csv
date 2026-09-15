@@ -1,0 +1,4 @@
+split,resampling_unit,unique_units,replicates,rejected_single_class_replicates
+cluster,edit_distance_2_cluster,1658,2000,0
+exact,peptide,1934,2000,0
+temporal,peptide,1935,2000,0
